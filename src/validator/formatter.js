@@ -1,8 +1,14 @@
+const str="   FunctionUp     ";
 const trimFun=()=>{
-    const str="   FunctionUp     ";
+    
     console.log(str.trim());
 }
-const toLowerCase=()=>{
-    
+const changetoLowerCase=()=>{
+    console.log(str.toLowerCase());
 }
-module.exports.trimFun=trimFun
+const changeToUpperCase=()=>{
+    console.log(str.toUpperCase());
+}
+module.exports.trimFun=trimFun;
+module.exports.changetoLowerCase=changetoLowerCase;
+module.exports.changeToUpperCase=changeToUpperCase;

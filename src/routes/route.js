@@ -12,6 +12,9 @@ router.get('/test-me', function (req, res) {
     externalModule1.printMonth()
     externalModule1.getBatchInfo()
     externalModule2.trimFun()
+    externalModule2.changetoLowerCase()
+    externalModule2.changeToUpperCase()
+
 
 });
 
