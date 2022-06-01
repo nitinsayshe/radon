@@ -6,6 +6,7 @@ This Project Demonstrate how private functions can be used as modules by coverti
 so that we can call them anywhere in a program. 
 
 In this project we are creating three diffrent scripts which will contain the diffrent functions.
+
     1. logger.js
         1. contain the welcome function, which will print some data to console
     
