@@ -5,7 +5,7 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 
 const printDate=()=>{
     const todayDate=date.getDate();
-    console.log("Todays Date: "+ todayDate +"  "+months[date.getMonth()])
+    console.log("Todays Date: "+ todayDate +" "+months[date.getMonth()] +" "+date.getFullYear())
 }
 const printMonth=()=>{
     const month=date.getMonth()
