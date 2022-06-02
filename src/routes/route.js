@@ -60,20 +60,20 @@ router.get('/candidates/:canidatesName', function(req, res){
 
 router.get('/movies',function(req,res){
     console.log("Movies List:",movieModule.movie_list)
-    res.send("Movie List")
+    res.send("Movie List : "+ movieModule.movie_list)
 })
 
 router.get('/movies/:indexNumber',function(req,res){
     console.log(movieModule.mov_index(req.params.indexNumber));
-    res.send("Movie Based on therir index")
+    res.send("Movie Based on their index : " +movieModule.mov_index(req.params.indexNumber))
 })
 router.get('/films',(req,res)=>{
     console.log(movieModule.films_list())
-    res.send("Movies array of Object")
+    res.send("Movies array of Object : "+ JSON.stringify(movieModule.films_list()))
 })
 router.get('/films/:filmId',(req,res)=>{
     console.log(movieModule.films_id(req.params.filmId))
-    res.send("Get Movie by Id")
+    res.send("Get Movie by Id : "+movieModule.films_id(req.params.filmId))
 })
 
 
