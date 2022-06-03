@@ -28,3 +28,8 @@ here we use some method od lodas lib,
     tail() -----to get the last 9 elements of array
     union ----- to merge multiple array and return the array of unique elements
 
+
+part 3 :
+ Misssing Number form an array:
+
+

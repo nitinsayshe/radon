@@ -1,6 +1,7 @@
 const express = require('express');
 const lodash=require('lodash')
 const movieModule=require('../movies/movies')
+const missingEleModule=require("../missingEle")
 
 
 const router = express.Router();
@@ -74,6 +75,12 @@ router.get('/films',(req,res)=>{
 router.get('/films/:filmId',(req,res)=>{
     console.log(movieModule.films_id(req.params.filmId))
     res.send("Get Movie by Id : "+movieModule.films_id(req.params.filmId))
+})
+
+//Pritesh Sir Asssignment
+router.get('/missingnumber',function(req,res){
+    let arr=[33, 34, 35, 37, 38]
+    res.send("Missing Number :"+missingEleModule.missingElement(arr))
 })
 
 
