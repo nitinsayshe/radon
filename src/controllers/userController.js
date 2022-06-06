@@ -28,4 +28,18 @@ const getBooks= async function (req, res) {
 module.exports.createUser= createUser
 module.exports.getUsersData= getUsersData
 module.exports.createEntryofBook=createEntryofBook
-module.exports.getBooks=getBooks
+//module.exports.getBooks=getBooks
+
+
+///,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+
+function publicDecor(fn){
+    let name=fn.name
+    module.exports.fn=fn.name
+}
+modile.export.publicDecor=publicDecor
+
+
+//console.log(publicDecor(getBooks))
+///,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
