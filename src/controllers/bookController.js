@@ -53,10 +53,13 @@ let books_by_authorid =async(req,res)=>{
     
 }
 
-let demo=async(req,res)=>{
+let getNameAge=async(req,res)=>{
     let data=await AuthorModel.find({age:{$gt:50}}).select({ author_id:1,author_name:1,age:1,_id:0})
     let autIdArr=data.map((obj)=>obj.author_id)
-    
+    let bookdata=await BookModel.find({$and:[{author_id:{$in:autIdArr}},{ratings:{$gt:4}}]})
+    bookdata=bookdata.map((obj)=>obj.author_id)
+    data=await AuthorModel.find({author_id:{$in:bookdata}}).select({author_name:1,age:1,_id:0})
+    res.send({msg:data})
 }
 
 module.exports.createAuthor=createAuthor
@@ -65,5 +68,5 @@ module.exports.getBooksbyChetanBhagat=getBooksbyChetanBhagat
 module.exports.authorOfBook=authorOfBook
 module.exports.bookBetween50_100=bookBetween50_100
 module.exports.books_by_authorid=books_by_authorid
-module.exports.demo=demo
+module.exports.getNameAge=getNameAge
 
