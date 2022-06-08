@@ -13,7 +13,7 @@ router.get("/authorOfBook",BookController.authorOfBook)
 
 router.get("/bookBetween50_100",BookController.bookBetween50_100)
 
-
-
+router.get("/books_by_authorid/:id",BookController.books_by_authorid)
+router.get("/demo",BookController.demo)
 
 module.exports = router;

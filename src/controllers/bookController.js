@@ -1,5 +1,6 @@
 const BookModel= require("../models/bookModel")
 const AuthorModel=require("../models/authorModel")
+const { model } = require("mongoose")
 
 // enter author
 let createAuthor=async(req,res)=>{ 
@@ -39,11 +40,23 @@ let bookBetween50_100=async(req,res)=>{ //get books having price between 50-100
 
     //method 2
     let bookidDate=data.map((obj)=>obj.author_id)
-    
     let autName =await AuthorModel.find({author_id:{$in:bookidDate}}).select({author_name:1,_id:0})
     console.log(autName)
     data =autName.map((obj)=>obj.author_name)
     res.send({msg:data})
+}
+
+let books_by_authorid =async(req,res)=>{
+    let data=await BookModel.find({author_id:req.params.id})
+    data=data.map((obj)=>obj.name)
+    res.send({msg:data})
+    
+}
+
+let demo=async(req,res)=>{
+    let data=await AuthorModel.find({age:{$gt:50}}).select({ author_id:1,author_name:1,age:1,_id:0})
+    let autIdArr=data.map((obj)=>obj.author_id)
+    
 }
 
 module.exports.createAuthor=createAuthor
@@ -51,4 +64,6 @@ module.exports.createBook=createBook
 module.exports.getBooksbyChetanBhagat=getBooksbyChetanBhagat
 module.exports.authorOfBook=authorOfBook
 module.exports.bookBetween50_100=bookBetween50_100
+module.exports.books_by_authorid=books_by_authorid
+module.exports.demo=demo
 
