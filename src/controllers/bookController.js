@@ -20,17 +20,15 @@ let getBooksbyChetanBhagat=async(req,res)=>{ //get books by chetan bhagat
     res.send({msg:bookData})
 }
 
-let authorOfBook=async(req,res)=>{ 
+let authorOfBook=async(req,res)=>{  //get author by book name and update price
     let data=await BookModel.findOneAndUpdate({name:"Two states"},{$set:{price:100}},{new:true})
     let authorData=await AuthorModel.find({author_id:data.author_id}).select("author_name ")
     let price=data.price
     res.send({msg:authorData,price})
 }
 
-let bookBetween50_100=async(req,res)=>{
+let bookBetween50_100=async(req,res)=>{ //get books having price between 50-100
     let data =await BookModel.find({$and:[{price:{$gt:49}},{price:{$lt:101}}]}).select({author_id:1,_id:0})
-
-
     // let arr=[]
     // let authorArr= data.map(async (e)=>{ 
     //     let x =await AuthorModel.find({author_id:e.author_id}).select({author_name:1,_id:0})
@@ -41,15 +39,11 @@ let bookBetween50_100=async(req,res)=>{
     //       });
     
     // })
-    
-   
     let arr=[]
     for (let i of data){
         let d= await AuthorModel.find({author_id:i.author_id}).select({author_name:1,_id:0})
         arr.push(d)
     }
-    
-
     // console.log(data)
     //  console.log("authorArr",authorArr)
     //  //console.log(x)
