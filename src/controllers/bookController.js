@@ -1,26 +1,26 @@
 const BookModel= require("../models/bookModel")
 const AuthorModel=require("../models/authorModel")
 
-let createAuthor=async(req,res)=>{
+let createAuthor=async(req,res)=>{ // enter author
     let data=req.body
     let saveData= await AuthorModel.create(data)
     res.send({msg:saveData}) 
 }
 
-let createBook=async(req,res)=>{
+let createBook=async(req,res)=>{ // enter book
     let data=req.body
     let saveData= await BookModel.create(data)
     res.send({msg:saveData})
 }
 
-let getBooksbyChetanBhagat=async(req,res)=>{
+let getBooksbyChetanBhagat=async(req,res)=>{ //get books by chetan bhagat
     let data=await AuthorModel.find({author_name:"Chetan Bhagat"}).select("author_id") //arry
     console.log(data)
     let bookData =await BookModel.find({author_id:data[0].author_id})
     res.send({msg:bookData})
 }
 
-let authorOfBook=async(req,res)=>{
+let authorOfBook=async(req,res)=>{ 
     let data=await BookModel.findOneAndUpdate({name:"Two states"},{$set:{price:100}},{new:true})
     let authorData=await AuthorModel.find({author_id:data.author_id}).select("author_name ")
     let price=data.price
@@ -49,7 +49,7 @@ let bookBetween50_100=async(req,res)=>{
         arr.push(d)
     }
     
-    
+
     // console.log(data)
     //  console.log("authorArr",authorArr)
     //  //console.log(x)
