@@ -1,7 +1,8 @@
 const BookModel= require("../models/bookModel")
 const AuthorModel=require("../models/authorModel")
 
-let createAuthor=async(req,res)=>{ // enter author
+// enter author
+let createAuthor=async(req,res)=>{ 
     let data=req.body
     let saveData= await AuthorModel.create(data)
     res.send({msg:saveData}) 
@@ -29,26 +30,20 @@ let authorOfBook=async(req,res)=>{  //get author by book name and update price
 
 let bookBetween50_100=async(req,res)=>{ //get books having price between 50-100
     let data =await BookModel.find({$and:[{price:{$gt:49}},{price:{$lt:101}}]}).select({author_id:1,_id:0})
+    // method 1
     // let arr=[]
-    // let authorArr= data.map(async (e)=>{ 
-    //     let x =await AuthorModel.find({author_id:e.author_id}).select({author_name:1,_id:0})
-    //     await arr.push(x)
-    //     Promise.all(x).then( (values) => {
-    //         console.log("Promices :",values[0].author_name);
-    //         //(arr.push(values[0].author_name))
-    //       });
+    // for (let i of data){
+    //     let d= await AuthorModel.find({author_id:i.author_id}).select({author_name:1,_id:0})
+    //     arr.push(d)
+    // }
+
+    //method 2
+    let bookidDate=data.map((obj)=>obj.author_id)
     
-    // })
-    let arr=[]
-    for (let i of data){
-        let d= await AuthorModel.find({author_id:i.author_id}).select({author_name:1,_id:0})
-        arr.push(d)
-    }
-    // console.log(data)
-    //  console.log("authorArr",authorArr)
-    //  //console.log(x)
-    //  console.log(arr)
-    res.send({msg:arr})
+    let autName =await AuthorModel.find({author_id:{$in:bookidDate}}).select({author_name:1,_id:0})
+    console.log(autName)
+    data =autName.map((obj)=>obj.author_name)
+    res.send({msg:data})
 }
 
 module.exports.createAuthor=createAuthor
