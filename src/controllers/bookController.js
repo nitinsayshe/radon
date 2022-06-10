@@ -7,13 +7,16 @@ var mongodb = require("mongodb")
 const createBook= async function (req, res) {
     
     let book = req.body // get the data from request body
-    //[ObjecID("62a1f206194c63050bb9f00e")] -----> "62a1f206194c63050bb9f00e"
-    let authorId=await authorModel.find().select({_id:1}) //get the list of objects contaning author obj_id
-    authorIdArr=authorId.map((obj)=>{return obj._id.toString()}) //get the string from object_id
 
-    //[ObjecID("62a1f206194c63050bb9f00e")] -----> "62a1f206194c63050bb9f00e"
+    
+    let authorId=await authorModel.find().select({_id:1}) //get the list of objects contaning author obj_id
+    //[ObjecID("62a1f206194c63050bb9f00e")] -----> "62a1f206194c63050bb9f00e"    
+    authorIdArr=authorId.map((obj)=>{return obj._id.toString()}) //get the list of string from object_id
+
+    
     let publisheId=await publisherModel.find().select({_id:1}) //get the list of objects contaning publisher obj_id
-    publishIdArr=publisheId.map((obj)=>{return obj._id.toString()}) //get the string from object_id
+    //[ObjecID("62a1f206194c63050bb9f00e")] -----> "62a1f206194c63050bb9f00e"
+    publishIdArr=publisheId.map((obj)=>{return obj._id.toString()}) //get the list of string from object_id
     
     if (book.author_id!=undefined){  //check if u enter the author id or not
         if(book.publisher_id!=undefined){ //check if u enter the publisher id or not
@@ -37,11 +40,11 @@ const getBooksData= async function (req, res) {
 }
 
 const getBooksWithAuthorDetails = async function (req, res) {
-    let specificBook = await bookModel.find().populate(['author_id'])
+    let specificBook = await bookModel.find().populate(['author_id']) 
     res.send({data: specificBook})
 }
 const getBooksWithAuthor_Public_Details = async function (req, res) {
-    let specificBook = await bookModel.find().populate(['author_id','publisher_id'])
+    let specificBook = await bookModel.find().populate(['author_id','publisher_id']) 
     res.send({data: specificBook})
 }
 

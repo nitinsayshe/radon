@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
+const middleware=require("./middleware/globalMiddleWare")
 const { default: mongoose } = require('mongoose');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -14,9 +16,9 @@ mongoose.connect("mongodb+srv://nitinsayshe:eocJtbZ0u5pZhiKt@cluster0.tyswy.mong
 .then( () => console.log("MongoDb is connected"))
 .catch ( err => console.log(err) )
 
+app.use(middleware.timeUrlmiddleWare); //middleware for giving Time and URL info
+
 app.use('/', route);
-
-
 app.listen(process.env.PORT || 3000, function () {
     console.log('Express app running on port ' + (process.env.PORT || 3000))
 });
