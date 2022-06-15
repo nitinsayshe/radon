@@ -17,6 +17,8 @@ const jwtMiddleware=async function (req,res,next){
     let decodedToken = jwt.verify(token, "functionup-radon");
     if (!decodedToken)
       return res.send({ status: false, msg: "token is invalid" });
+    if (decodedToken.userId!==req.params.userId)
+      return res.send({status:false,msg:"You are not authorizre to do this task"})
     next()
 }
 
